@@ -1,0 +1,12 @@
+docker pull ghcr.io/kasipavankumar/sqoop-docker:latest
+
+docker run -it ghcr.io/kasipavankumar/sqoop-docker:latest
+
+sqoop import --connect jdbc:mysql://192.168.1.100:3306/classicmodels \
+             --username root --password confluent \
+             --table customers \
+             --target-dir /user/root/output
+
+hadoop fs -ls /user/root/output
+
+hadoop fs -cat /user/root/output/part-m-00003
